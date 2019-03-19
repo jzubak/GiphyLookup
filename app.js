@@ -12,6 +12,7 @@ $(document).on("click", ".gif", function () {
         method: "GET"
     }).then(function (response) {
         var gifDiv = $("<img>");
+        var ratingDiv = $("<p></p>");
         //    console.log(response);
 
         var Divresult = response.data;
@@ -22,8 +23,9 @@ $(document).on("click", ".gif", function () {
         $(gifDiv).attr("src", Divresult[2].images.fixed_height.url);
         // console.log($(this).attr("data-name"));
         $("#gifform").append(gifDiv);
-        $(gifDiv).append("src", Divresult[2].images.fixed_height.url);
-        // $(gifDiv).append("<p>Rating: "+Divresult[i].Rating+"</p>")
+        $(gifDiv).append("src", Divresult[2].images.fixed_height_still.url);
+        $(ratingDiv).text("Rating: "+Divresult[2].rating)
+        $("#gifform").append(ratingDiv);
     });
 
 });
@@ -44,7 +46,8 @@ function createbuttons() {
 }
 
 // function displaygif() {
-$("#run-search").on("click", function () {
+$("#run-search").on("click", function (event) {
+    event.preventDefault();
     for (var i = 0; i < gifs.length; i++);
     var input = $("#data-input").val().trim();
     // console.log(input);
@@ -54,13 +57,15 @@ $("#run-search").on("click", function () {
         method: "GET"
     }).then(function (response) {
         var newgif = $("<img>");
+        var newrating = $("<p></p>");
         var gifresult = response.data;
         // console.log(gifresult[i]);
         $(newgif).attr("src", gifresult[i].images.fixed_height.url);
         // console.log($(this).attr("data-name"));
         $("#gifform").append(newgif);
-        $(newgif).append("src", gifresult[i].images.fixed_height.url);
-        $(newgif).append("<p> Rating: " + gifresult[i].rating + "</p>");
+        $(newgif).append("src", gifresult[i].images.fixed_height_still.url);
+        $(newrating).text("Rating: "+gifresult[i].rating)
+        $("#gifform").append(newrating);
 
         var gifStill = gifresult[i].images.fixed_height_still.url;
         var gifAnimate = gifresult[i].images.fixed_height.url;
