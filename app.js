@@ -1,4 +1,3 @@
-
 // $("button").on("click", function() {
 //     event.preventDefault();
 //     var used = $(this).attr("data-input");
@@ -26,22 +25,26 @@
 //         }
 //       });
 //   });
+//starter gif buttons
 var gifs = ["WOW", "AWESOME", "COOL"];
-function gifbuttons() {
+//function to create new buttons
+function createbuttons() {
     $("#gifbuttons").empty();
-    var gifbuttons = $("<button>");
-    for (var i = 0; i < gifs.length; i++);
-    var a = $("<button>");
-    a.addClass("gif");
-    a.attr("data-input", gifs[i]);
-    a.text(gifs[i]);
-    $("#gifbuttons").append(a);
+    var gifbutton = $("<button>");
+    for (var i = 0; i < gifs.length; i++){
+    var gifbutton = $("<button>");
+    gifbutton.addClass("gif");
+    gifbutton.attr("data-input", gifs[i]);
+    gifbutton.text(gifs[i]);
+    $("#gifbuttons").append(gifbutton);
+    console.log(gifs)
+    }
 }
 $("#add-gif").on("click", function (event) {
     event.preventDefault();
     var gif = $("#data-input").val().trim();
     gifs.push(gif);
-
+    $("#gifbuttons").empty();
     gifbuttons();
 });
 
@@ -57,11 +60,12 @@ $("#run-search").on("click", function () {
         var newgif = $("<img>");
         var gifresult = response.data;
         console.log(gifresult[i]);
-        newgif.attr("src", gifresult[i].images.fixed_height.url);
+        $(newgif).attr("src", gifresult[i].images.fixed_height.url);
         // console.log($(this).attr("data-name"));
         $("#gifform").append(newgif);
-        // $(newgif).append("img src=" + gifresult + "/>");
+        $(newgif).append("src", gifresult[i].images.fixed_height.url);
         $(newgif).append("<p> Rating: " + gifresult.Rating + "</p>");
 
     });
-});
+    });
+    createbuttons();
