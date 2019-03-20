@@ -51,7 +51,7 @@ $("#run-search").on("click", function (event) {
     for (var i = 0; i < gifs.length; i++);
     var input = $("#data-input").val().trim();
     // console.log(input);
-    var queryURL = `http://api.giphy.com/v1/gifs/search?q=${input}&api_key=3JW2RJ6dsMStATDsiKO2H94sZZkjci7j`;
+    var queryURL = `https://api.giphy.com/v1/gifs/search?q=${input}&api_key=3JW2RJ6dsMStATDsiKO2H94sZZkjci7j`;
     $.ajax({
         url: queryURL,
         method: "GET"
